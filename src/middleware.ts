@@ -1,39 +1,16 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
-import { withClerkMiddleware } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-const publicRoutes = [
+const isPublicRoute = createRouteMatcher([
   "/",
   "/api/clerk-webhook",
   "/api/drive-activity/notification",
   "/api/payment/success",
-];
+]);
 
-const ignoredRoutes = [
-  "/api/auth/callback/discord",
-  "/api/auth/callback/notion",
-  "/api/auth/callback/slack",
-  "/api/flow",
-  "/api/cron/wait",
-];
-
-export default withClerkMiddleware((req) => {
-  const url = req.nextUrl.pathname;
-
-  if (publicRoutes.includes(url)) {
-    return NextResponse.next();
+export default clerkMiddleware(async (auth, request) => {
+  if (!isPublicRoute(request)) {
+    await auth.protect();
   }
-
-  // Default Clerk authentication handling
-  return NextResponse.next();
-
-  // Skip Clerk middleware for ignored routes
-  if (ignoredRoutes.includes(url)) {
-    return NextResponse.next();
-  }
-
-  // Default Clerk handling for all other routes
-  return NextResponse.next();
 });
 
 export const config = {
