@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import React, { useEffect } from "react";
 
@@ -19,7 +21,7 @@ const UploadCareButton = ({ onUpload }: Props) => {
         router.refresh();
       }
     };
-  }, []);
+  }, [onUpload, router]);
 
   return (
     <div>

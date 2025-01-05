@@ -1,11 +1,16 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import ProfileForm from "@/src/components/forms/profile-form";
 import React from "react";
 import ProfilePicture from "./_components/profile-picture";
 import { db } from "@/src/lib/db";
+import { currentUser } from "@clerk/nextjs/server";
 
 type Props = {};
 
-const Settings = (props: Props) => {
+const Settings = async (props: Props) => {
+  const authUser = await currentUser();
+  if (!authUser) return null;
   const removeProfileImage = async () => {
     "use server";
     const response = await db.user.update({
