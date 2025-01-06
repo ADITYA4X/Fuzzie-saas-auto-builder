@@ -1,18 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 import { FileUploaderRegular } from "@uploadcare/react-uploader/next";
 import "@uploadcare/react-uploader/core.css";
 import { useRouter } from "next/navigation";
 
 type Props = {
-  onUpload?: any;
+  onUpload?: (cdnUrl: string) => Promise<unknown>;
 };
 
 const UploadCareButton = ({ onUpload }: Props) => {
   const router = useRouter();
+  const ctxProviderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleUpload = async (e: any) => {
@@ -21,10 +20,22 @@ const UploadCareButton = ({ onUpload }: Props) => {
         router.refresh();
       }
     };
+    const currentRef = ctxProviderRef.current;
+
+    if (currentRef) {
+      currentRef.addEventListener("file-upload-success", handleUpload);
+    }
+
+    // Cleanup on component unmount
+    return () => {
+      if (currentRef) {
+        currentRef.removeEventListener("file-upload-success", handleUpload);
+      }
+    };
   }, [onUpload, router]);
 
   return (
-    <div>
+    <div ref={ctxProviderRef}>
       <FileUploaderRegular
         sourceList="local, url, camera, dropbox"
         classNameUploader="uc-dark uc-gray"

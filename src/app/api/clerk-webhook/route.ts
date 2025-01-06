@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     console.log("✅✅", body);
 
     await db.user.upsert({
-      where: {},
+      where: { clerkId: id },
       update: {
         email,
         name: first_name,
