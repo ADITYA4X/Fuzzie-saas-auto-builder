@@ -6,7 +6,7 @@ import "@uploadcare/react-uploader/core.css";
 import { useRouter } from "next/navigation";
 
 type Props = {
-  onUpload?: (cdnUrl: string) => Promise<unknown>;
+  onUpload?: (cdnUrl: string) => Promise<any>;
 };
 
 const UploadCareButton = ({ onUpload }: Props) => {
