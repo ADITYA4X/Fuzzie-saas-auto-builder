@@ -8,8 +8,10 @@ import {
   Controls,
   Edge,
   EdgeChange,
+  applyEdgeChanges,
   MiniMap,
   NodeChange,
+  applyNodeChanges,
   ReactFlow,
   ReactFlowInstance,
 } from "@xyflow/react";
@@ -114,6 +116,9 @@ const EditorCanvas = (props: Props) => {
           type: type,
         },
       };
+
+      //   console.log("setting");
+
       //@ts-ignore
       setNodes((nds) => nds.concat(newNode));
     },
