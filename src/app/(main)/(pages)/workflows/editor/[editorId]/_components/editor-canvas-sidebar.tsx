@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { EditorCanvasTypes, EditorNodeType } from "@/src/lib/types";

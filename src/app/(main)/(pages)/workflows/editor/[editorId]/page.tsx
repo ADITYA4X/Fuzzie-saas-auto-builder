@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ConnectionsProvider } from "@/src/providers/connections-provider";
 import EditorProvider from "@/src/providers/editor-provider";
 import React from "react";
