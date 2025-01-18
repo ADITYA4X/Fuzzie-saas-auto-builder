@@ -3,7 +3,11 @@ import {
   getNotionConnection,
   getNotionDatabase,
 } from "../app/(main)/(pages)/connections/_actions/notion-connection";
-import { getSlackConnection } from "../app/(main)/(pages)/connections/_actions/slack-connection";
+import {
+  getSlackConnection,
+  listBotChannels,
+} from "../app/(main)/(pages)/connections/_actions/slack-connection";
+import { Option } from "../components/ui/multiple-selector";
 import { ConnectionProviderProps } from "../providers/connections-provider";
 import { EditorCanvasCardType } from "./types";
 
@@ -133,4 +137,11 @@ export const onConnections = async (
       });
     }
   }
+};
+
+export const fetchBotSlackChannels = async (
+  token: string,
+  setSlackChannels: (slackChannels: Option[]) => void
+) => {
+  await listBotChannels(token)?.then((channels) => setSlackChannels(channels));
 };
