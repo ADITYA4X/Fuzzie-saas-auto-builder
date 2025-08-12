@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import React, { useEffect, useState } from "react";
@@ -29,8 +30,10 @@ const ProfileForm = ({ user, onUpdate }: Props) => {
     mode: "onChange",
     resolver: zodResolver(EditUserProfileSchema),
     defaultValues: {
-      name: user.name,
-      email: user.email,
+      // name: user.name,
+      // email: user.email,
+      name: "",
+      email: "",
     },
   });
 
@@ -43,8 +46,14 @@ const ProfileForm = ({ user, onUpdate }: Props) => {
   };
 
   useEffect(() => {
-    form.reset({ name: user.name, email: user.email });
-  }, [user]);
+    if (user) {
+      form.reset({
+        name: user.name || "",
+        email: user.email || "",
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.name, user?.email]);
 
   return (
     <Form {...form}>
@@ -68,18 +77,14 @@ const ProfileForm = ({ user, onUpdate }: Props) => {
         />
 
         <FormField
+          disabled={true}
           control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-lg">Email</FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  disabled={true}
-                  placeholder="Email"
-                  type="email"
-                />
+                <Input {...field} placeholder="Email" type="email" />
               </FormControl>
               <FormMessage />
             </FormItem>

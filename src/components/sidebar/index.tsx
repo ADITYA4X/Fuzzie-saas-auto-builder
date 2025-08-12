@@ -16,21 +16,18 @@ import {
   Crown,
   Database,
   GitBranch,
-  ListTodo,
   LucideMousePointerClick,
 } from "lucide-react";
 import { ModeToggle } from "../global/mode-toggle";
 
-type Props = {};
-
-const MenuOptions = (props: Props) => {
+const MenuOptions = () => {
   const pathName = usePathname();
 
   return (
     <nav className=" dark:bg-black h-screen overflow-scroll  justify-between flex items-center flex-col  gap-10 py-6 px-2">
       <div className="flex items-center justify-center flex-col gap-8">
-        <Link className="flex font-bold flex-row " href="/">
-          fuzzie.
+        <Link className="flex font-bold flex-row" href="/">
+          FuzziE.
         </Link>
         <TooltipProvider>
           {menuOptions.map((menuItem) => (
@@ -43,7 +40,7 @@ const MenuOptions = (props: Props) => {
                       className={clsx(
                         "group h-8 w-8 flex items-center justify-center  scale-[1.5] rounded-lg p-[3px]  cursor-pointer",
                         {
-                          "dark:bg-[#2F006B] bg-[#EEE0FF] ":
+                          "dark:bg-[#2F006B] bg-[#EEE0FF] border border-purple-800 dark:border-purple-50":
                             pathName === menuItem.href,
                         }
                       )}
@@ -56,7 +53,7 @@ const MenuOptions = (props: Props) => {
                 </TooltipTrigger>
                 <TooltipContent
                   side="right"
-                  className="bg-black/10 backdrop-blur-xl "
+                  className="bg-purple-200 dark:bg-purple-950 backdrop-blur-xl ml-1"
                 >
                   <p>{menuItem.name}</p>
                 </TooltipContent>

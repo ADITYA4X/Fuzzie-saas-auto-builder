@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CONNECTIONS } from "@/src/lib/constant";
 import React from "react";
 import ConnectionCard from "./_components/connection-card";

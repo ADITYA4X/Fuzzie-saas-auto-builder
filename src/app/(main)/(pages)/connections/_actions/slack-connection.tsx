@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import { Option } from "@/src/components/ui/multiple-selector";
@@ -17,10 +18,12 @@ export const onSlackConnect = async (
 ): Promise<void> => {
   if (!slack_access_token) return;
 
-  const slackConnection = await db.slack.findFirst({
+  const slackConnection = await db.slack.findUnique({
     where: { slackAccessToken: slack_access_token },
     include: { connections: true },
   });
+
+  console.log("User ID being passed:", user_id);
 
   if (!slackConnection) {
     await db.slack.create({
@@ -123,6 +126,7 @@ export const postMessageToSlack = async (
         postMessageInSlackChannel(slackAccessToken, channel, content);
       });
   } catch (error) {
+    console.log(error);
     return { message: "Message could not be sent to Slack" };
   }
 

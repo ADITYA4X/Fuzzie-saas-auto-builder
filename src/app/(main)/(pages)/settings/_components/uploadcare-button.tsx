@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useEffect, useRef } from "react";
 
@@ -15,7 +16,7 @@ const UploadCareButton = ({ onUpload }: Props) => {
 
   useEffect(() => {
     const handleUpload = async (e: any) => {
-      const file = await onUpload(e.detail.cdnUrl);
+      const file = await onUpload?.(e.detail.cdnUrl);
       if (file) {
         router.refresh();
       }

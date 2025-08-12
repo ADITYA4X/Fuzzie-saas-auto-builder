@@ -59,7 +59,7 @@ export const Header = ({ translate, titleComponent }: any) => {
       style={{
         translateY: translate,
       }}
-      className="div max-w-5xl mx-auto text-center"
+      className="div max-w-5xl mx-auto text-center mb-16"
     >
       {titleComponent}
     </motion.div>
@@ -79,6 +79,7 @@ export const Card = ({
     <motion.div
       style={{
         rotateX: rotate, // rotate in X-axis
+        translateY: translate,
         scale,
         boxShadow:
           "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
@@ -90,7 +91,7 @@ export const Card = ({
           src="/temp-banner.png"
           fill
           alt="bannerImage"
-          className="object-cover border-8 rounded-2xl"
+          className="object-cover border-8 rounded-2xl "
         />
       </div>
     </motion.div>

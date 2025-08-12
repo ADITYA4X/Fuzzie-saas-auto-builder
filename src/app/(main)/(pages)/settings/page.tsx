@@ -4,9 +4,7 @@ import ProfilePicture from "./_components/profile-picture";
 import { db } from "@/src/lib/db";
 import { currentUser } from "@clerk/nextjs/server";
 
-type Props = {};
-
-const Settings = async (props: Props) => {
+const Settings = async () => {
   const authUser = await currentUser();
   if (!authUser) return null;
 

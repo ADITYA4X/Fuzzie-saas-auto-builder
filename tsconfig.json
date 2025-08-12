@@ -12,6 +12,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+
     "plugins": [
       {
         "name": "next"
@@ -20,7 +21,8 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "types": ["@uploadcare/file-uploader/types/jsx"]
+    "types": ["@uploadcare/file-uploader/types/jsx"],
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
